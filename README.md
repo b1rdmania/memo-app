@@ -1,73 +1,103 @@
-# React + TypeScript + Vite
+# memo-app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The web app for the [`memo`](https://github.com/b1rdmania/memo) Claude skill. Turns a legal memo into the right shape for whoever's reading it next — client, junior lawyer or senior lawyer. Every claim cites the source paragraph with a confidence label.
 
-Currently, two official plugins are available:
+**Live:** [memo-app-eta-tawny.vercel.app](https://memo-app-eta-tawny.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What it is
 
-## React Compiler
+A fully static, BYOK demo of the `memo` skill.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Three audiences** — Client, Junior lawyer, Senior lawyer. One output per audience. No format picker.
+- **Paragraph citations** — every factual claim maps to the source paragraph it came from.
+- **Confidence per claim** — `high`, `med`, `low`. Honest about what's a fact and what's professional judgment.
+- **Plain-English pass** on the client output. No Latin, no case names, no section numbers.
+- **Two pre-baked sample memos** — 20-paragraph employment matter, 82-paragraph SPA dispute. Instant load, no key.
+- **PDF / DOCX / TXT** parsed in the browser via pdf.js and mammoth.
+- **iOS Safari verified** — 44px tap targets, `overflow-x: clip`, `100svh` sidebars, no rubber-band.
 
-## Expanding the ESLint configuration
+## Architecture
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+browser ──► Anthropic API
+   │
+   └── pre-baked sample JSON (static)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+There is no backend. No database, no functions, no logs. The Anthropic SDK runs in the user's browser with their own API key, stored in `localStorage` only. The "Try sample" buttons serve pre-baked JSON from `/public/samples`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+This is the right shape for legal content: privileged or confidential text never traverses a third-party server.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Run locally
+
+```bash
+git clone https://github.com/b1rdmania/memo-app
+cd memo-app
+npm install
+npm run dev
 ```
+
+Visit `http://localhost:5173`.
+
+## Build
+
+```bash
+npm run build      # tsc + vite build
+npm run preview    # serve the production bundle locally
+```
+
+## Deploy
+
+Static hosting anywhere. Production target is Vercel:
+
+```bash
+vercel --prod
+```
+
+The output in `dist/` is plain HTML + JS + JSON; serve it from any CDN.
+
+## Project structure
+
+```
+public/
+├── samples/           # pre-baked sample memos + outputs (Khan, TideSync)
+└── favicon.svg
+
+src/
+├── components/
+│   ├── shared/        # Header, Logo
+│   ├── Landing.tsx    # paste / upload / sample picker
+│   ├── Result.tsx     # output view, sidebar audience switcher
+│   ├── About.tsx      # numbered TOC + sections
+│   └── AudiencePicker.tsx
+├── lib/
+│   ├── anthropic.ts   # browser-side SDK call with dangerouslyAllowBrowser
+│   ├── skill.ts       # the system prompt (mirrors b1rdmania/memo SKILL.md)
+│   ├── samples.ts     # sample memo registry + loader
+│   ├── parseFile.ts   # PDF (pdf.js) + DOCX (mammoth) + text parsing
+│   ├── paragraphize.ts # adds [N] markers to memo paragraphs
+│   └── types.ts
+├── App.tsx            # state-based view switching: landing / result / about
+└── main.tsx
+
+thumbnail/             # 1200×1200 project thumbnail (HTML → Chrome headless)
+```
+
+## Tech stack
+
+| Layer | Choice |
+|---|---|
+| Build | Vite 8 + TypeScript |
+| UI | React 19 + Tailwind 3 |
+| AI | `@anthropic-ai/sdk` — Claude Opus 4.7 |
+| PDF parsing | pdf.js (`pdfjs-dist`) |
+| DOCX parsing | mammoth |
+| Hosting | Vercel (static) |
+
+## Status
+
+Prototype. Not for privileged or client-confidential material. See the deployed [About page](https://memo-app-eta-tawny.vercel.app) for the full thesis and the open collaborator ask.
+
+## License
+
+MIT. © 2026 Birdmania.

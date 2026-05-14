@@ -1,7 +1,16 @@
 {
   "name": "memo-app",
+  "description": "Web app for the memo Claude skill — turn a legal memo into the right shape for whoever's reading it next.",
+  "homepage": "https://memo-app-eta-tawny.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/b1rdmania/memo-app.git"
+  },
+  "license": "MIT",
+  "author": "Birdmania (https://github.com/b1rdmania)",
+  "keywords": ["legal-ai", "claude", "anthropic", "legal-tech", "memo", "vibecode"],
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

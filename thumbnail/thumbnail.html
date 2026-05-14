@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 1200px; overflow: hidden; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #FFFFFF;
+    color: #181818;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .canvas {
+    width: 1200px;
+    height: 1200px;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #181818;
+    position: relative;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .brand-mark .bar {
+    height: 4px;
+    background: #181818;
+  }
+  .brand-mark .bar:nth-child(1) { width: 70%; }
+  .brand-mark .bar:nth-child(2) { width: 100%; }
+  .brand-mark .bar:nth-child(3) { width: 55%; }
+  .brand-mark .bar:nth-child(4) { width: 80%; }
+  .brand-mark .bar:nth-child(5) { width: 40%; }
+  .brand-name {
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: #181818;
+  }
+  .version {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .audience {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 168px;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    color: #181818;
+  }
+  .rule {
+    width: 80px;
+    height: 1px;
+    background: #181818;
+    margin: 36px 0;
+  }
+  .tagline {
+    font-size: 26px;
+    line-height: 1.35;
+    color: #4b5563;
+    max-width: 760px;
+    font-weight: 400;
+  }
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    color: #181818;
+    font-weight: 500;
+  }
+  .meta {
+    display: flex;
+    gap: 24px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <div class="header-row">
+    <div class="brand">
+      <div class="brand-mark">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <div class="brand-name">MEMO</div>
+    </div>
+    <div class="version">v0.1 · MAY 2026</div>
+  </div>
+
+  <div>
+    <div class="stack">
+      <div class="audience">Client.</div>
+      <div class="audience">Junior.</div>
+      <div class="audience">Senior.</div>
+    </div>
+    <div class="rule"></div>
+    <div class="tagline">
+      One memo. Three audiences. The tool decides the shape — and cites every claim back to the source.
+    </div>
+  </div>
+
+  <div class="footer-row">
+    <div class="url">memo-app-eta-tawny.vercel.app</div>
+    <div class="meta">
+      <span>Claude Skill</span>
+      <span>·</span>
+      <span>By Birdmania</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
