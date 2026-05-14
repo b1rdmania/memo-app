@@ -1,0 +1,66 @@
+{
+  "decision": "Whether to start ACAS conciliation alongside drafting your tribunal claim, or push for early settlement first — we need your answer by Friday 9 May.",
+  "rendered": "The decision: we need to know by Friday 9 May whether you want us to start ACAS conciliation alongside drafting your tribunal claim, or push for early settlement first.\n\nHere's where we are. Acme dismissed you on 12 March over a £1,840 client dinner that you say was legitimate business entertainment. We think you have a strong unfair dismissal case, but with real weaknesses.\n\nYour case is helped by the £42,000 contract BlueLight Logistics signed with Acme two weeks after the dinner — that supports your account that it was entertainment, not personal spending. Acme's procedure also looks poor: the same manager investigated and chaired your hearing, you only saw the evidence at the hearing itself, and your appeal went to the dismissing officer's line manager. The tribunal will not like that.\n\nAcme's best point is that the staff handbook required pre-approval for entertainment over £500 and you didn't seek it. You say your manager Tom Reeves waived this in practice, but he has left the business — proving that without him is hard.\n\nOn numbers: likely compensation is around £12,600, or up to £15,750 with the 25% uplift for breaching the ACAS code. You started a new job on 5 May at £6,400 less, which helps your claim but caps it. A negotiated settlement between £8,000 and £12,000 plus a reference is realistic.\n\nTime is tight. The hard deadline to file is 3 July. We need your decision by 24 June.\n\nPlease don't contact anyone at Acme, and keep your credit card statement and handover note in their original form.",
+  "claims": [
+    {
+      "claim": "We need your decision by Friday 9 May on whether to run ACAS conciliation alongside the ET1 or pursue early settlement first",
+      "source_paragraphs": [17],
+      "confidence": "high"
+    },
+    {
+      "claim": "Acme dismissed you on 12 March 2026 over a £1,840 dinner you say was legitimate client entertainment",
+      "source_paragraphs": [6],
+      "confidence": "high"
+    },
+    {
+      "claim": "You have a strong unfair dismissal case overall, but with real weaknesses",
+      "source_paragraphs": [10, 11, 15],
+      "confidence": "med"
+    },
+    {
+      "claim": "BlueLight Logistics signed a £42,000 contract with Acme two weeks after the dinner, which supports the entertainment account",
+      "source_paragraphs": [10],
+      "confidence": "high"
+    },
+    {
+      "claim": "The same manager investigated and chaired the disciplinary hearing; you only saw the evidence at the hearing; the appeal went to the dismissing officer's line manager",
+      "source_paragraphs": [9],
+      "confidence": "high"
+    },
+    {
+      "claim": "Acme will rely on paragraph 4.7 of the staff handbook requiring pre-approval over £500, which you did not seek",
+      "source_paragraphs": [11],
+      "confidence": "high"
+    },
+    {
+      "claim": "Your line manager Tom Reeves waived the pre-approval rule in practice but has left the business, making the point hard to prove",
+      "source_paragraphs": [11],
+      "confidence": "high"
+    },
+    {
+      "claim": "Indicative compensation is approximately £12,600, or £15,750 with the 25% ACAS Code uplift",
+      "source_paragraphs": [12],
+      "confidence": "high"
+    },
+    {
+      "claim": "You started a new role on 5 May at £6,400 less than your Acme package",
+      "source_paragraphs": [12],
+      "confidence": "high"
+    },
+    {
+      "claim": "A negotiated settlement in the £8,000–£12,000 range plus a reference is a realistic commercial outcome",
+      "source_paragraphs": [15],
+      "confidence": "high"
+    },
+    {
+      "claim": "The extended primary limitation date is 3 July 2026; we need confirmed instructions by 24 June 2026 to allow drafting time",
+      "source_paragraphs": [13, 14],
+      "confidence": "high"
+    },
+    {
+      "claim": "Do not contact any Acme employee directly; preserve the credit card statement and handover note in their original form",
+      "source_paragraphs": [16],
+      "confidence": "high"
+    }
+  ]
+}

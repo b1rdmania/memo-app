@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  }
+  .font-serif {
+    font-family: 'Newsreader', ui-serif, Georgia, serif;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+}
+
+@layer components {
+  .claim-mark {
+    background: rgba(217, 119, 87, 0.18);
+    padding: 1px 2px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 120ms ease;
+  }
+  .claim-mark:hover,
+  .claim-mark.active {
+    background: rgba(217, 119, 87, 0.42);
+  }
+  .conf-high { color: #2f855a; }
+  .conf-med  { color: #b7791f; }
+  .conf-low  { color: #c53030; }
+}

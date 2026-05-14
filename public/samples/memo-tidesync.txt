@@ -1,0 +1,156 @@
+[1] MEMORANDUM — PRIVILEGED & CONFIDENTIAL
+[2] To: Helena Vance, Managing Partner, Northshore Capital Partners LLP
+[3] From: R. Devlin, Hartwell & Greaves LLP (Commercial Disputes)
+[4] Re: TideSync Logistics Ltd — warranty, indemnity and misrepresentation claims against David Lockwood under SPA dated 14 February 2025
+[5] Date: 11 May 2026
+[6] Our ref: NCP/TS/2026-074
+
+[7] You instruct us in connection with potential claims by Northshore Capital Partners LLP ("Northshore" or "the Buyer") against David Lockwood ("Lockwood" or "the Seller") under the share purchase agreement dated 14 February 2025 ("the SPA") by which Northshore acquired 100% of the issued share capital of TideSync Logistics Ltd ("TideSync" or "the Company") for headline consideration of £8.5m plus an earn-out of up to £2m payable over the three-year period to 14 February 2028.
+
+[8] Lockwood was the founder and sole director-shareholder of TideSync prior to completion. He resigned as a director on completion but was retained as a consultant under a separate consultancy agreement for the 18-month period to 14 August 2026. His consultancy was terminated by Northshore on 22 April 2026 following the matters set out below.
+
+[9] This memorandum sets out (i) the four substantive issues that have come to light since completion; (ii) the legal analysis on each; (iii) the position on notification under the SPA; (iv) quantum; (v) counterclaim and competitive risk; (vi) the W&I insurance position; and (vii) our recommended strategy. Time-critical items are flagged in paragraph 78.
+
+[10] Background. TideSync is a logistics broker operating in the chilled-foods supply chain, founded by Lockwood in 2014. At the date of the SPA the company reported turnover of £14.2m and adjusted EBITDA of £2.1m. The acquisition was modelled on a maintained-EBITDA basis with the earn-out gated to FY2026 and FY2027 EBITDA thresholds of £2.0m and £2.4m respectively.
+
+[11] The SPA was negotiated over approximately four months. Northshore was represented by Eversfield Quinn LLP; Lockwood was represented by Pearce & Lazenby. The disclosure letter ran to 142 pages. Warranty & indemnity insurance was taken out by Northshore with Markel International (policy reference MKL/2025/W&I/0418) at a primary limit of £4m with a retention of £42,500.
+
+[12] Issue 1: Belmont Freight contract. TideSync's largest single customer was Belmont Freight Logistics plc, accounting for approximately 22% of FY2024 revenue (£3.1m). The customer relationship is documented in a framework agreement dated 3 March 2022 with annual reviews.
+
+[13] On 9 January 2025 — that is, five weeks before completion — Belmont Freight issued a notice of intention to retender the contract on a new specification, with stated effect that the existing framework would expire by effluxion of time on 31 March 2026 unless TideSync was successful in the retender. The letter is on the TideSync files. Lockwood signed receipt.
+
+[14] The notice was not referenced in the disclosure letter. Schedule 4 of the SPA, paragraph 7.3, contains a warranty that "no customer accounting for more than 5% of turnover in the 12 months preceding the date of this Agreement has given written or, to the Seller's knowledge, oral notice of an intention to terminate, suspend or materially reduce its contractual relationship with the Company." That warranty is given as at the SPA date and, by virtue of the bring-down provision in clause 8.2, repeated at completion.
+
+[15] TideSync was unsuccessful in the Belmont retender. The framework expired on 31 March 2026 and was not replaced. The lost revenue is being absorbed by Northshore's wider portfolio company SeaLane Distribution but on materially worse margins. The annualised EBITDA impact is approximately £480,000.
+
+[16] Issue 2: HMRC R&D tax credit dispute. TideSync claimed R&D tax credits totalling £640,000 across the four accounting periods ended 31 December 2020 to 31 December 2023 in respect of its automated load-matching software, "TideMatch". Claims were made through Lockwood's accountants, Marsden & Bell, on the SME R&D scheme.
+
+[17] HMRC opened a compliance check on 12 November 2024 — three months before the SPA — questioning whether TideMatch constituted qualifying R&D within the meaning of CTA 2009 sections 1052 and 1054, given that it relied substantially on third-party APIs and open-source machine-learning libraries. The opening letter is on the company files.
+
+[18] Lockwood did not disclose the HMRC compliance check in the disclosure letter. Schedule 4 paragraph 12.1 warrants that "no Tax Authority has, within the 12 months preceding the date of this Agreement, raised any enquiry, opened any compliance check or initiated any other formal procedure in respect of the Company's tax affairs." The tax indemnity at clause 11 separately covers any tax liability arising in respect of pre-completion periods.
+
+[19] HMRC issued a closure notice on 18 March 2026 disallowing £540,000 of the claimed credits and indicating an interest and penalty exposure of approximately £100,000. Marsden & Bell, instructed by Northshore post-completion, advise that an appeal has reasonable prospects on £180,000 of the disallowed amount but the balance (approximately £360,000) is unrecoverable. Total realistic exposure: £460,000 with appeal, £640,000 without.
+
+[20] Issue 3: Director's loan account. The completion accounts, signed by Lockwood on 14 February 2025, show a director's loan account balance of nil. The SPA at clause 6.4 warrants that the completion accounts are true and accurate in all material respects and prepared on a consistent basis with prior audited accounts.
+
+[21] On post-completion review by Northshore's finance team, ledger entries show a director's loan balance of £180,000 outstanding to Lockwood at completion, masked by a journal entry dated 11 February 2025 reclassifying the balance as "consulting fees prepaid" — three days before completion. There is no underlying invoice, contract or services delivery to support the reclassification.
+
+[22] Marsden & Bell, who were aware of the journal at the time, have written to Northshore stating that the reclassification was made on Lockwood's instruction without supporting documentation. Their letter is dated 5 April 2026.
+
+[23] Issue 4: Software licensing on change of control. TideMatch depends on a perpetual licence to use the "RouteCore" routing engine, licensed from RouteCore Systems Inc (a US company). The licence agreement dated 8 May 2019 contains, at clause 14.2, a provision that "the licence granted hereunder shall terminate automatically upon any change of control of the Licensee unless the prior written consent of the Licensor is obtained."
+
+[24] No such consent was obtained before completion. The change of control was not notified to RouteCore Systems Inc. The disclosure letter at section 6.8 lists material licences but does not identify the change-of-control provision.
+
+[25] On 28 April 2026, RouteCore Systems Inc wrote to TideSync asserting that the licence had terminated on 14 February 2025 and demanding that all use of RouteCore software cease within 30 days. The replacement cost (engineering migration plus new licence) is estimated at £320,000 with a six-month migration timetable during which TideMatch capability would be materially degraded.
+
+[26] Schedule 4 paragraph 9.2 of the SPA warrants that "completion of the transactions contemplated by this Agreement will not result in any default under, or termination or right of termination of, any material contract to which the Company is a party." The RouteCore licence is listed as a material contract in Schedule 5.
+
+[27] Legal analysis — warranty claims generally. The threshold for a warranty claim under the SPA is a de minimis of £10,000 per claim and an aggregate basket of £85,000 (clause 9.3). All four issues exceed the de minimis individually. The aggregate cap on warranty claims is £4,000,000 (clause 9.4), excluding the tax indemnity which is separately capped at £8,500,000.
+
+[28] On Issue 1 (Belmont), the warranty at Schedule 4 paragraph 7.3 is plainly breached. Lockwood signed receipt of the 9 January 2025 letter. The "to the Seller's knowledge" qualifier in the warranty is not engaged because the notice was written.
+
+[29] Lockwood's likely defence: the Belmont letter was framed as a "retender invitation" rather than a "notice of intention to terminate". On the natural reading of the letter ("the framework will expire by effluxion of time on 31 March 2026 unless..."), this is unarguable. The letter does communicate an intention to terminate the existing arrangement.
+
+[30] On Issue 2 (HMRC), the warranty at Schedule 4 paragraph 12.1 is plainly breached. The HMRC compliance check was opened on 12 November 2024 — within the 12-month window. Lockwood was aware (the opening letter went to him as director and Marsden & Bell copied him on correspondence).
+
+[31] In addition to the warranty claim, the tax indemnity at clause 11 covers the £640,000 (or £460,000 with appeal) HMRC liability directly. The indemnity has its own £8.5m cap and seven-year notification window (to 14 February 2032), so it provides the cleaner recovery path on the tax exposure itself. The warranty claim is useful chiefly as a route to consequential losses (e.g., professional fees, management time).
+
+[32] On Issue 3 (DLA reclassification), the most natural cause of action is fraudulent misrepresentation. The journal entry of 11 February 2025 has no documentary support and was made three days before completion with the apparent purpose of clearing the DLA balance before signing. If proved, this opens the door to: (a) rescission of the SPA (unlikely to be pursued — the Buyer wants the business); (b) damages on the tort measure (potentially uncapped, since fraud carves out of clause 9.4); (c) loss of any cap and exclusion protection under clause 9.10 fraud carve-out.
+
+[33] The fraud allegation must be carefully pleaded. The standard for pleading fraud in the High Court is high (Three Rivers DC v Bank of England (No 3) [2003] 2 AC 1). We must be satisfied on the balance of probabilities that fraud is the proper inference before pleading.
+
+[34] On Issue 4 (RouteCore), the warranty at Schedule 4 paragraph 9.2 is breached. The change-of-control provision was triggered; consent was not obtained; the licence has terminated according to RouteCore's letter. The breach is clear.
+
+[35] However, the loss position is dependent on (a) whether RouteCore will negotiate (most US licensors will, for a fee), and (b) the realistic engineering cost of migration if they will not. Current estimate £320,000 but this is unverified.
+
+[36] Notification — general warranty claims. Clause 9.5 of the SPA requires that any claim under the general warranties (i.e., excluding the tax indemnity) be notified in writing to the Seller "within 18 months of Completion specifying in reasonable detail the matter giving rise to the claim, the nature of the breach and (so far as reasonably ascertainable) the amount claimed."
+
+[37] Completion was 14 February 2025. The 18-month notification deadline is therefore 14 August 2026 — fourteen weeks from the date of this memorandum. This is the critical date for Issues 1, 3 and 4. A non-compliant notification is fatal to the claim irrespective of merits (RWE Nukem Ltd v AEA Technology plc [2005] EWHC 78 (Comm); Laminates Acquisition Co v BTR Australia Ltd [2003] EWHC 2540 (Comm)).
+
+[38] Notification — tax indemnity. The tax indemnity has its own seven-year notification window running to 14 February 2032 and a more relaxed notification standard ("notice in writing of the claim"). The tax claim is not under time pressure.
+
+[39] Notification — fraud. The fraud claim is not subject to the SPA notification regime by virtue of the clause 9.10 fraud carve-out. The Limitation Act 1980 applies: six years from discovery or reasonable discoverability. Discovery here is the Marsden & Bell letter of 5 April 2026.
+
+[40] Quantum — Issue 1 (Belmont). Annualised EBITDA loss approximately £480,000. On a maintained-EBITDA basis the loss is the EBITDA impact times the implicit multiple at which the business was acquired. Headline price £8.5m divided by FY2024 EBITDA £2.1m gives an implicit multiple of 4.05x. Belmont-attributable loss therefore approximately £1.94m on the goodwill measure. Lower if Northshore can demonstrate replacement of Belmont volume — none demonstrated to date.
+
+[41] Quantum — Issue 2 (HMRC). Direct exposure £460,000 with appeal, £640,000 without. Plus professional fees of the appeal (estimated £40,000) and our fees prosecuting recovery (estimated £85,000 to mediation, £180,000 to trial). Indemnity route is cleanest.
+
+[42] Quantum — Issue 3 (DLA + misrepresentation). The £180,000 unpaid DLA is a direct loss. Tort-measure damages on misrepresentation could be argued more widely — restoring the Buyer to the position it would have been in but for the misrepresentation — but proof of wider loss is difficult and our preliminary view is the £180,000 is the realistic recovery.
+
+[43] Quantum — Issue 4 (RouteCore). £320,000 migration estimate, plus migration period EBITDA degradation (unquantified to date but potentially £150,000–£250,000 across the six months). Will refine when engineering scoping complete.
+
+[44] Aggregate. Approximate quantum on warranty claims: £2.94m–£3.21m. Within the £4m warranty cap. Tax indemnity adds £460,000–£640,000 on top, under its separate cap. Total realistic recovery before any fraud-enhanced damages: £3.4m–£3.85m.
+
+[45] W&I insurance position. The Markel policy responds to warranty claims subject to (a) the £42,500 retention applied once per policy year; (b) standard exclusions including known matters and pre-completion fraud; (c) a £4m limit aggregate with sub-limits on tax warranties (£2m) and IP/licensing warranties (£2m).
+
+[46] Markel were notified of the Belmont issue on 7 April 2026 and the HMRC issue on 22 April 2026. The 30-day notification standard under the policy has been met on both. Notification on RouteCore is due by 28 May 2026 — diary item, prepare draft notification now.
+
+[47] The DLA / fraud allegation is more complicated. The W&I policy excludes losses arising from pre-completion seller fraud. If we run that allegation hard, we may lose insurance cover on the related warranty claim. However, the fraud carve-out is also what opens uncapped damages against Lockwood personally. Strategy point: see below.
+
+[48] Counterclaim risk — earn-out manipulation. Lockwood has indicated through Pearce & Lazenby that he intends to bring counterclaims relating to (a) alleged manipulation of FY2025 management accounts by Northshore to depress earn-out triggers, and (b) constructive dismissal under the consultancy agreement following his termination on 22 April 2026.
+
+[49] On (a), the earn-out is gated to FY2026 and FY2027 EBITDA. FY2025 is not a gate. The complaint is that Northshore loaded one-off integration costs into FY2025 which would otherwise have fallen into FY2026, thereby suppressing FY2026's measured EBITDA below the £2.0m threshold. The SPA at Schedule 7 paragraph 4 requires earn-out accounts to be prepared "on a consistent basis with the FY2024 audited accounts and in accordance with UK GAAP, with one-off restructuring costs excluded."
+
+[50] Provisional view: the integration costs are arguably one-off restructuring costs and excludable under Schedule 7. If so, Lockwood's earn-out complaint has substance and could be worth up to £2m to him. Recommend an early reconciliation of FY2026 earn-out accounts to neutralise this point before we issue.
+
+[51] On (b), the consultancy agreement provides for termination on three months' notice or, by clause 12.4, summary termination "for material breach incapable of remedy or causing material damage to the Company." Northshore terminated summarily citing the matters in this memorandum.
+
+[52] Lockwood's argument will be that the matters cited are warranty matters under the SPA and not contractual breaches of the consultancy agreement, which had its own narrower obligations. Risk that summary termination is held wrongful; on that footing Lockwood would be entitled to three months' fees in lieu (£37,500) plus statutory pay-in-lieu of notice.
+
+[53] Counterclaim risk — non-compete. Lockwood is restricted by clause 14 of the SPA from carrying on a competing business within the UK for 24 months from completion (to 14 February 2027) and from soliciting TideSync customers or employees for 36 months (to 14 February 2028).
+
+[54] Northshore's intelligence: Lockwood is in advanced discussions with two former TideSync clients (Aldwell Distribution and Norchill Foods) about a new venture trading as "ColdCircuit Ltd" (registration filed at Companies House 18 April 2026, sole director D. Lockwood). The arrangement appears to involve a joint logistics broking arrangement.
+
+[55] On the face of it, clause 14 is breached. Enforceability is the standard question — is the restraint reasonable in scope and duration? 24-month UK-wide is at the upper end of what English courts typically uphold for a vendor (Mason v Provident Clothing & Supply Co Ltd [1913] AC 724; more recently Tillman v Egon Zehnder Ltd [2019] UKSC 32). For a vendor of a logistics broker with national reach, 24 months UK-wide is likely enforceable; we have authority on broadly comparable facts.
+
+[56] Strategy options. Three broad options:
+
+[57] Option A — global settlement. Approach Pearce & Lazenby with a without-prejudice offer to compromise all SPA claims (warranty + indemnity + misrepresentation) in exchange for (i) a quantified payment from Lockwood; (ii) abandonment of his earn-out and consultancy claims; (iii) injunction-equivalent undertakings on non-compete. Likely range £2.5m–£3.0m on the headline number, with earn-out and consultancy waiver baked in.
+
+[58] Option B — issue High Court proceedings for fraud, warranty breaches, tax indemnity and breach of non-compete (the last by injunction). Preserves the maximum quantum position. Costs to trial estimated £450,000–£650,000. Recovery risk: Lockwood's personal asset position is uncertain. We hold a charge over his shareholding in ColdCircuit Ltd as security under the SPA but that is presently nominal.
+
+[59] Option C — sequenced: notify all warranty and indemnity claims under the SPA timetable (Issue 1 within weeks for the 14 August deadline); seek interim injunctive relief on the non-compete; hold the fraud allegation in reserve as leverage. This sequencing keeps the W&I cover open on the warranty claims while preserving the personal claim against Lockwood for the DLA fraud.
+
+[60] Our recommendation is Option C, on the following reasoning. The warranty cap is £4m and aggregate quantum is comfortably within it; W&I cover up to £4m is the cleanest recovery path on the corporate claims. Running fraud hard risks excluding cover under the W&I policy. The fraud claim, if it has substance, is best pursued as a personal claim against Lockwood for the £180,000 DLA loss (uncapped, uninsured) without poisoning the W&I claim on the other issues. The non-compete should be enforced separately and quickly — every week of trading Lockwood is permitted to do erodes the value of the injunction.
+
+[61] On the earn-out point, we should commission an early reconciliation of FY2026 earn-out accounts with Marsden & Bell and a forensic accountant of Northshore's choice, with the aim of either (i) accepting that the integration costs should fall into FY2026 (neutralising Lockwood's complaint) or (ii) establishing the basis on which they were properly attributed to FY2025. We should do this before any SPA claim is filed, not after, because Lockwood's counterclaim has independent merit.
+
+[62] Funding and risk. Northshore is comfortably resourced and not reliant on a costs-recovery strategy. Eversfield Quinn has been instructed for ancillary corporate work; we should liaise but the conduct of the disputes should remain with us. After-the-event insurance is not necessary; no DBA or CFA contemplated.
+
+[63] W&I claims handling. Markel are not yet in dispute. The standard pattern is for the W&I insurer to step in to defend the warranty claim with the Buyer as nominal claimant. Markel have appointed counsel (a partner at Linklaters Disputes for monitoring; will likely brief Peters Bramwell QC if it proceeds). Co-operation with Markel is contractual; we should expect their direction on claims strategy save where conflicts arise.
+
+[64] Privilege. All correspondence with Pearce & Lazenby should go through this firm. All internal Northshore documents discussing the disputes should be marked "PRIVILEGED & CONFIDENTIAL — PREPARED FOR LITIGATION" and routed through us where possible. Note the recent Court of Appeal guidance in Civil Aviation Authority v R (Jet2.com Ltd) [2020] EWCA Civ 35 on litigation privilege.
+
+[65] Disclosure preservation. Northshore should preserve all data held on TideSync systems and email archives from 1 January 2024 to date. Lockwood's former consultancy mailbox should be imaged before any further action is taken on it. Marsden & Bell should be put on notice to preserve their files on TideSync.
+
+[66] Marsden & Bell — separate exposure. Marsden & Bell's letter of 5 April 2026 effectively concedes their professional involvement in a journal entry made on Lockwood's instructions without supporting documentation. They have potential professional liability for the £180,000 DLA loss in their own right. We should not exclude a separate professional negligence claim against them — but suggest it is held in reserve until the position with Lockwood is clearer.
+
+[67] Markel — claim cap interaction. The W&I sub-limit on IP/licensing warranties is £2m. The RouteCore claim alone could approach this on a worst-case migration scenario. Suggest commissioning an engineering scoping exercise immediately to firm up the figure.
+
+[68] Internal Northshore stakeholder communications. The Northshore IC and LP committee will need to be briefed. Suggest holding initial briefing at IC level only pending a clearer view of recoverable quantum. Do not externally communicate the existence of the disputes beyond what is strictly required.
+
+[69] Limitations. The analysis in this memorandum is preliminary and based on documents reviewed to 11 May 2026. Material matters that may alter the analysis: (a) outstanding HMRC appeal outcome; (b) RouteCore migration scoping; (c) engagement with Markel on coverage position; (d) any further documents identified in disclosure review.
+
+[70] Decision required from Northshore. (i) Approval of Option C as the conduct strategy. (ii) Authority to issue draft warranty notification letters for Issues 1, 3 and 4 ahead of the 14 August 2026 deadline. (iii) Authority to engage Linklaters / Markel coordination on W&I claims strategy. (iv) Authority to instruct Atkins Bramwell (forensic accountants) to scope the FY2026 earn-out reconciliation. (v) Authority to instruct Counsel (Joshua Park KC of Fountain Court) for advice on the fraud claim and on injunctive relief for the non-compete. (vi) Confirmation that Marsden & Bell professional negligence claim is held in reserve and not pursued at this stage.
+
+[71] We require Northshore's decision on items (i)–(vi) by no later than Friday 23 May 2026 to maintain the timetable.
+
+[72] Indicative budget. Phase 1 (notification, scoping, initial counterproposal): £85,000–£120,000. Phase 2 (issue and pre-trial through to mediation): £200,000–£280,000. Phase 3 (trial): £200,000–£280,000 additional. Subject to W&I claim coverage which will offset Phase 2 costs proportionate to the warranty recovery.
+
+[73] Next steps and milestones. 14 May 2026 — engineering scoping kicks off (RouteCore migration). 21 May 2026 — forensic accounting reconciliation kicks off (FY2026 earn-out). 23 May 2026 — Northshore decision on items (i)–(vi). 28 May 2026 — Markel notification on RouteCore due. 6 June 2026 — draft warranty notification letters prepared. 27 June 2026 — counsel conference on fraud and injunction. 18 July 2026 — final form notification letters served on Lockwood. 14 August 2026 — long-stop deadline for general warranty notifications.
+
+[74] Reservations. We have not yet sight of the underlying Belmont correspondence files in full, nor the complete RouteCore Systems correspondence. Our analysis assumes those documents support the position summarised in this memorandum. We will revise as documents are reviewed.
+
+[75] Counsel. We propose Joshua Park KC (Fountain Court) for SPA and warranty work, instructed for advice initially and conferenced before any pleading is settled. For the injunctive relief on non-compete, Sarah Mitchell of 11 Stone Buildings would be our recommendation given her recent work in Tillman-line cases.
+
+[76] Costs recovery. CPR 44 standard basis. Realistic recovery on costs at trial 60–70% of incurred fees. Mediation typically delivers better cost outcomes but cannot be assumed; Lockwood's posture to date suggests he will not engage commercially until pressure is applied.
+
+[77] Conflicts. We have no conflict. Hartwell & Greaves has not acted for Lockwood, TideSync, Belmont Freight or RouteCore Systems. Eversfield Quinn (Northshore's corporate counsel on the SPA) are conflicted out of the dispute work — confirmed in writing on 28 April 2026.
+
+[78] TIME-CRITICAL ACTIONS. (a) 14 August 2026 general warranty notification deadline — hard. (b) 28 May 2026 Markel notification on RouteCore — hard. (c) Non-compete enforcement: every week of permitted competing trading erodes the injunction. Recommend interim relief application within four weeks of decision to proceed.
+
+[79] We are available to discuss this memorandum at any time. Suggest a meeting in the week commencing 19 May 2026 in our office or yours.
+
+[80] Yours sincerely,
+[81] R. Devlin
+[82] Hartwell & Greaves LLP
