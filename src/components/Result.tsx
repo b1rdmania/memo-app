@@ -2,6 +2,7 @@ import { useMemo, useRef, useState, useEffect } from 'react';
 import type { Audience, MemoOutput } from '../lib/types';
 import { loadSample, type SampleKey } from '../lib/samples';
 import { runMemo } from '../lib/anthropic';
+import { Header } from './shared/Header';
 
 interface Props {
   memo: string;
@@ -10,6 +11,7 @@ interface Props {
   source: 'sample' | 'live';
   sampleKey?: SampleKey;
   onBack: () => void;
+  onAbout: () => void;
   onSwap: (audience: Audience, output: MemoOutput) => void;
 }
 
@@ -29,10 +31,10 @@ const AUDIENCE_SUB: Record<Audience, string> = {
 
 const AUDIENCES: Audience[] = ['client', 'junior', 'senior'];
 
-export function Result({ memo, audience, output, source, sampleKey, onBack, onSwap }: Props) {
+export function Result({ memo, audience, output, source, sampleKey, onBack, onAbout, onSwap }: Props) {
   const [activeClaim, setActiveClaim] = useState<number | null>(null);
   const [swapping, setSwapping] = useState<Audience | null>(null);
-  const memoRef = useRef<HTMLPreElement>(null);
+  const memoRef = useRef<HTMLDivElement>(null);
 
   const paragraphs = useMemo(() => splitMemo(memo), [memo]);
   const activeParagraphs = useMemo(() => {
@@ -74,129 +76,166 @@ export function Result({ memo, audience, output, source, sampleKey, onBack, onSw
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-8">
-      <div className="flex items-baseline justify-between mb-6 gap-4 flex-wrap">
-        <button
-          type="button"
-          onClick={onBack}
-          className="text-xs font-mono text-muted hover:text-ink uppercase tracking-wider"
-        >
-          ← New memo
-        </button>
-        {source === 'sample' && (
-          <div className="text-xs font-mono uppercase tracking-wider border border-rule px-2 py-1 rounded-sm">
-            Pre-baked sample
-          </div>
-        )}
-      </div>
-
-      <div className="mb-8">
-        <div className="flex gap-1 border-b border-rule">
-          {AUDIENCES.map(a => (
+    <>
+      <Header onHome={onBack} onAbout={onAbout} />
+      <div className="pt-[64px] sm:pt-[80px]">
+        <div className="max-w-page mx-auto lg:flex">
+          {/* SIDEBAR */}
+          <aside className="lg:w-80 lg:shrink-0 lg:sticky lg:top-[80px] lg:h-page lg:overflow-y-auto lg:border-r border-rule border-b lg:border-b-0 p-6 lg:p-10">
             <button
-              key={a}
               type="button"
-              onClick={() => switchAudience(a)}
-              disabled={!!swapping}
-              className={`px-4 py-3 text-sm border-b-2 -mb-px transition-colors disabled:opacity-50 ${
-                a === audience
-                  ? 'border-ink text-ink font-medium'
-                  : 'border-transparent text-muted hover:text-ink hover:border-rule'
-              }`}
+              onClick={onBack}
+              className="eyebrow hover:text-ink mb-6 inline-flex items-center gap-2 min-h-[44px]"
             >
-              {swapping === a ? 'Loading…' : AUDIENCE_LABEL[a]}
+              ← New memo
             </button>
-          ))}
-        </div>
-        <div className="text-xs text-muted mt-2 font-mono">
-          {AUDIENCE_SUB[audience]}
-        </div>
-      </div>
 
-      <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8">
-        <div>
-          <div className="border border-accent/40 bg-accent/5 p-4 rounded-sm mb-6">
-            <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-accent mb-1.5">
-              Decision
+            <div className="eyebrow mb-4">Audience</div>
+            <nav className="flex flex-col gap-0 mb-10">
+              {AUDIENCES.map((a, i) => (
+                <button
+                  key={a}
+                  type="button"
+                  onClick={() => switchAudience(a)}
+                  disabled={!!swapping}
+                  className={`py-3 border-l-2 text-sm transition-all pl-4 text-left min-h-[44px] disabled:opacity-50 ${
+                    a === audience
+                      ? 'border-ink text-ink font-semibold'
+                      : 'border-transparent text-prose hover:text-ink'
+                  }`}
+                >
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-xs font-mono text-muted">0{i + 1}.</span>
+                    <span>{swapping === a ? 'Loading…' : AUDIENCE_LABEL[a]}</span>
+                  </div>
+                  <div className="text-xs text-muted pl-6 mt-0.5 font-normal">
+                    {AUDIENCE_SUB[a]}
+                  </div>
+                </button>
+              ))}
+            </nav>
+
+            <div className="border-t border-rule pt-6">
+              <div className="eyebrow-sm mb-3">Status</div>
+              {source === 'sample' ? (
+                <div className="text-xs text-prose">Pre-baked sample. Audience swaps are free.</div>
+              ) : (
+                <div className="text-xs text-prose">Live run. Swapping audience uses your API key.</div>
+              )}
             </div>
-            <div className="text-ink leading-relaxed">{output.decision}</div>
-          </div>
+          </aside>
 
-          <div className="whitespace-pre-wrap text-ink leading-relaxed font-serif text-[17px]">
-            {output.rendered}
-          </div>
-
-          <div className="mt-10 border-t border-rule pt-6">
-            <div className="text-xs font-mono uppercase tracking-wider text-muted mb-3">
-              Claims ({output.claims.length}) — click to highlight source
+          {/* MAIN */}
+          <main className="flex-1 p-6 sm:p-10 lg:p-16 max-w-4xl">
+            <div className="mb-12">
+              <div className="eyebrow mb-3">Memo for</div>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight2 text-ink mb-3 leading-[1.1]">
+                {AUDIENCE_LABEL[audience]}
+              </h1>
+              <div className="text-base text-muted">{AUDIENCE_SUB[audience]}</div>
             </div>
-            <ol className="space-y-2">
-              {output.claims.map((c, i) => (
-                <li key={i}>
-                  <button
-                    type="button"
-                    onClick={() => setActiveClaim(i === activeClaim ? null : i)}
-                    className={`w-full text-left p-3 border rounded-sm transition-colors ${
-                      activeClaim === i
-                        ? 'border-ink bg-ink/5'
-                        : 'border-rule hover:border-ink/40 bg-white'
-                    }`}
-                  >
-                    <div className="flex items-start gap-3">
-                      <ConfidenceChip c={c.confidence} />
-                      <div className="flex-1">
-                        <div className="text-sm text-ink leading-snug">{c.claim}</div>
-                        <div className="text-xs text-muted font-mono mt-1">
-                          {c.source_paragraphs.length === 0
-                            ? '— no source (professional judgment)'
-                            : `¶ ${c.source_paragraphs.join(', ')}`}
+
+            {/* DECISION CALLOUT */}
+            <div className="bg-wash p-8 border-l-4 border-ink mb-12">
+              <div className="eyebrow-sm mb-3">Decision</div>
+              <div className="text-ink leading-relaxed text-base sm:text-lg">{output.decision}</div>
+            </div>
+
+            {/* RENDERED */}
+            <section className="mb-20">
+              <h2 className="text-2xl font-bold tracking-tight2 text-ink mb-6">
+                01. The brief
+              </h2>
+              <div className="whitespace-pre-wrap text-ink leading-[1.7] text-[16px] sm:text-[17px] prose-p-block">
+                {output.rendered}
+              </div>
+            </section>
+
+            {/* CLAIMS */}
+            <section className="mb-20">
+              <h2 className="text-2xl font-bold tracking-tight2 text-ink mb-3">
+                02. Claims & sources
+              </h2>
+              <p className="prose-p text-sm">
+                Every claim is mapped to the source paragraph(s) it draws on,
+                with a confidence label. Tap a claim to highlight its source
+                below.
+              </p>
+              <ol className="space-y-2 mt-8">
+                {output.claims.map((c, i) => (
+                  <li key={i}>
+                    <button
+                      type="button"
+                      onClick={() => setActiveClaim(i === activeClaim ? null : i)}
+                      className={`w-full text-left p-4 border transition-colors min-h-[44px] ${
+                        activeClaim === i
+                          ? 'border-ink bg-wash'
+                          : 'border-rule hover:border-ink bg-paper'
+                      }`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <ConfidenceChip c={c.confidence} />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm text-ink leading-snug">{c.claim}</div>
+                          <div className="text-xs text-muted font-mono mt-1.5">
+                            {c.source_paragraphs.length === 0
+                              ? '— no source (professional judgment)'
+                              : `¶ ${c.source_paragraphs.join(', ')}`}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </button>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
+                    </button>
+                  </li>
+                ))}
+              </ol>
+            </section>
 
-        <aside className="lg:sticky lg:top-6 lg:self-start">
-          <div className="text-xs font-mono uppercase tracking-wider text-muted mb-3">
-            Source memo
-          </div>
-          <pre
-            ref={memoRef}
-            className="text-xs font-mono leading-relaxed whitespace-pre-wrap bg-white border border-rule rounded-sm p-4 overflow-y-auto max-h-[80vh]"
-          >
-            {paragraphs.map(({ n, text }) => (
+            {/* SOURCE MEMO */}
+            <section className="mb-20">
+              <h2 className="text-2xl font-bold tracking-tight2 text-ink mb-3">
+                03. Source memo
+              </h2>
+              <p className="prose-p text-sm">
+                The paragraph-numbered input. Highlighted paragraphs are the
+                source for the claim selected above.
+              </p>
               <div
-                key={n}
-                data-pno={n}
-                className={`py-1.5 px-2 -mx-2 rounded-sm transition-colors ${
-                  activeParagraphs.has(n) ? 'bg-accent/20 text-ink' : 'text-muted'
-                }`}
+                ref={memoRef}
+                className="text-xs sm:text-sm font-mono leading-[1.7] bg-paper border border-rule p-4 sm:p-6 mt-8 overflow-y-auto max-h-[70vh]"
               >
-                <span className="text-accent font-medium">[{n}]</span>{' '}
-                <span>{text}</span>
+                {paragraphs.map(({ n, text }) => (
+                  <div
+                    key={n}
+                    data-pno={n}
+                    className={`py-1.5 px-2 -mx-2 transition-colors ${
+                      activeParagraphs.has(n) ? 'bg-yellow-100 text-ink' : 'text-prose'
+                    }`}
+                  >
+                    <span className="text-ink font-semibold">[{n}]</span>{' '}
+                    <span className="whitespace-pre-wrap">{text}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </pre>
-        </aside>
+            </section>
+
+            <footer className="mt-24 pt-10 border-t border-rule flex flex-wrap justify-between items-center gap-4 text-xs text-muted uppercase tracking-track2">
+              <span>© 2026 Birdmania · MIT</span>
+              <div className="flex gap-6">
+                <a href="https://github.com/b1rdmania/memo" target="_blank" rel="noreferrer" className="hover:text-ink">Skill</a>
+                <button onClick={onAbout} className="hover:text-ink uppercase tracking-track2">About</button>
+              </div>
+            </footer>
+          </main>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
 function ConfidenceChip({ c }: { c: 'high' | 'med' | 'low' }) {
-  const cls =
-    c === 'high'
-      ? 'bg-green-50 text-green-800 border-green-200'
-      : c === 'med'
-      ? 'bg-amber-50 text-amber-800 border-amber-200'
-      : 'bg-red-50 text-red-800 border-red-200';
   return (
     <span
-      className={`text-[10px] font-mono uppercase tracking-wider border px-1.5 py-0.5 rounded-sm shrink-0 ${cls}`}
+      className={`text-[10px] font-mono uppercase tracking-track1 border px-2 py-0.5 shrink-0 conf-${c}`}
     >
       {c}
     </span>

@@ -4,16 +4,25 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        serif: ['Newsreader', 'ui-serif', 'Georgia', 'serif'],
-        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       colors: {
-        ink: '#131314',
-        paper: '#faf9f7',
-        muted: '#6b6b6b',
-        accent: '#d97757',
-        rule: '#e7e5df',
+        ink: '#181818',
+        paper: '#FFFFFF',
+        rule: '#E5E5E5',
+        wash: '#F4F4F4',
+        muted: '#9ca3af',
+        prose: '#4b5563',
+        hover: '#bfbfbf',
+      },
+      maxWidth: {
+        page: '1440px',
+      },
+      letterSpacing: {
+        tight2: '-0.02em',
+        track1: '0.1em',
+        track2: '0.2em',
       },
     },
   },

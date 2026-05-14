@@ -20,7 +20,7 @@ function App() {
   const [result, setResult] = useState<ResultState | null>(null);
 
   if (view === 'about') {
-    return <About onBack={() => setView(result ? 'result' : 'landing')} />;
+    return <About onHome={() => setView(result ? 'result' : 'landing')} />;
   }
 
   if (view === 'result' && result) {
@@ -35,6 +35,7 @@ function App() {
           setResult(null);
           setView('landing');
         }}
+        onAbout={() => setView('about')}
         onSwap={(audience, output) =>
           setResult({ ...result, audience, output })
         }

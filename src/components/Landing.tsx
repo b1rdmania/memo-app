@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Header } from './shared/Header';
 import { AudiencePicker } from './AudiencePicker';
 import { SAMPLES, loadSample, type SampleKey } from '../lib/samples';
 import { parseFile } from '../lib/parseFile';
@@ -7,7 +8,7 @@ import { runMemo } from '../lib/anthropic';
 import type { Audience, MemoOutput } from '../lib/types';
 
 interface Props {
-  onResult: (memo: string, audience: Audience, output: MemoOutput, source: 'sample' | 'live', sampleKey?: SampleKey, liveCtx?: { numbered: string }) => void;
+  onResult: (memo: string, audience: Audience, output: MemoOutput, source: 'sample' | 'live', sampleKey?: SampleKey) => void;
   onAbout: () => void;
 }
 
@@ -55,7 +56,7 @@ export function Landing({ onResult, onAbout }: Props) {
     try {
       const numbered = paragraphize(text);
       const output = await runMemo(key, numbered, audience);
-      onResult(numbered, audience, output, 'live', undefined, { numbered });
+      onResult(numbered, audience, output, 'live');
     } catch (e: any) {
       setError(e.message ?? 'Run failed');
     } finally {
@@ -79,121 +80,200 @@ export function Landing({ onResult, onAbout }: Props) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-10 sm:py-14">
-      <nav className="flex items-center justify-between mb-12">
-        <div className="text-xs uppercase tracking-[0.18em] text-muted font-mono">
-          memo
-        </div>
-        <button
-          type="button"
-          onClick={onAbout}
-          className="text-xs font-mono text-muted hover:text-ink uppercase tracking-wider"
-        >
-          About
-        </button>
-      </nav>
-
-      <header className="mb-10">
-        <h1 className="font-serif text-4xl sm:text-5xl leading-[1.05] text-ink mb-4">
-          Legal memos,<br />reshaped for the reader.
-        </h1>
-        <p className="text-muted text-lg max-w-2xl leading-relaxed">
-          Three audiences. One output per audience. The tool decides the shape.
-          Every claim cites the source paragraph with a confidence score.
-        </p>
-      </header>
-
-      <section className="mb-12">
-        <div className="text-xs uppercase tracking-wider text-muted font-mono mb-3">
-          Try a sample — instant, no API key
-        </div>
-        <div className="grid sm:grid-cols-2 gap-3">
-          {Object.values(SAMPLES).map(s => (
-            <button
-              key={s.key}
-              type="button"
-              disabled={busy}
-              onClick={() => runSample(s.key)}
-              className="text-left border border-rule p-4 rounded-sm hover:border-ink hover:bg-ink/5 transition-colors bg-white disabled:opacity-50 group"
-            >
-              <div className="flex items-baseline justify-between gap-2 mb-1">
-                <div className="font-medium text-ink text-sm">{s.label}</div>
-                <div className="text-xs font-mono text-muted group-hover:text-accent">→</div>
+    <>
+      <Header onHome={() => {}} onAbout={onAbout} active="home" />
+      <div className="pt-[64px] sm:pt-[80px]">
+        <main className="max-w-4xl mx-auto px-6 py-12 sm:py-20">
+          {/* HERO */}
+          <div className="mb-20">
+            <div className="text-xs font-mono text-muted mb-4">VERSION 0.1 — MAY 2026</div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight2 text-ink mb-6 leading-[1.05]">
+              Legal memos,<br />reshaped for the reader.
+            </h1>
+            <p className="text-lg sm:text-xl text-prose leading-relaxed max-w-2xl">
+              Three audiences. One output per audience. The tool decides the
+              shape. Every claim cites the source paragraph with a confidence
+              score.
+            </p>
+            <div className="flex flex-wrap gap-x-10 gap-y-4 mt-10 pb-10 border-b border-rule">
+              <div>
+                <div className="eyebrow mb-1.5">By</div>
+                <a
+                  href="https://github.com/b1rdmania"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm font-semibold text-ink underline decoration-rule hover:decoration-ink"
+                >
+                  Birdmania
+                </a>
               </div>
-              <div className="text-xs text-muted leading-relaxed">{s.description}</div>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <section className="mb-10">
-        <div className="text-xs uppercase tracking-wider text-muted font-mono mb-3">
-          Or run on your own memo
-        </div>
-
-        <label className="flex items-start gap-2 mb-4 text-sm text-muted cursor-pointer">
-          <input
-            type="checkbox"
-            checked={privilegeAck}
-            onChange={e => setPrivilegeAck(e.target.checked)}
-            className="mt-1"
-          />
-          <span>
-            I understand this is a prototype. I will not paste privileged, client-confidential, or sensitive material.
-            Your Anthropic API key and memo stay in your browser — nothing is sent to a Memo server.
-          </span>
-        </label>
-
-        <div className="mb-3">
-          <AudiencePicker value={audience} onChange={setAudience} />
-        </div>
-
-        <textarea
-          value={text}
-          onChange={e => setText(e.target.value)}
-          placeholder="Paste your memo here."
-          rows={10}
-          className="w-full border border-rule bg-white p-4 rounded-sm font-mono text-sm leading-relaxed focus:outline-none focus:border-ink"
-        />
-
-        <div className="flex flex-wrap items-center gap-3 mt-3">
-          <label className="inline-flex items-center gap-2 text-sm text-muted cursor-pointer">
-            <span className="px-3 py-1.5 border border-rule rounded-sm hover:border-ink">
-              Upload .pdf / .docx / .txt
-            </span>
-            <input
-              type="file"
-              accept=".pdf,.docx,.txt,.md"
-              onChange={onFile}
-              className="hidden"
-            />
-          </label>
-
-          <button
-            type="button"
-            disabled={busy}
-            onClick={runLive}
-            className="ml-auto bg-ink text-paper px-5 py-2 rounded-sm hover:bg-accent transition-colors disabled:opacity-50 text-sm font-medium"
-          >
-            {busy ? 'Working…' : 'Distil →'}
-          </button>
-        </div>
-
-        {error && (
-          <div className="mt-3 text-sm text-red-700 border border-red-200 bg-red-50 p-3 rounded-sm">
-            {error}
+              <div>
+                <div className="eyebrow mb-1.5">Status</div>
+                <div className="text-sm font-semibold text-ink">Prototype</div>
+              </div>
+              <div>
+                <div className="eyebrow mb-1.5">License</div>
+                <div className="text-sm font-semibold text-ink">MIT</div>
+              </div>
+              <div>
+                <div className="eyebrow mb-1.5">Skill</div>
+                <a
+                  href="https://github.com/b1rdmania/memo"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm font-semibold text-ink underline decoration-rule hover:decoration-ink"
+                >
+                  github.com/b1rdmania/memo
+                </a>
+              </div>
+            </div>
           </div>
-        )}
-      </section>
 
-      <footer className="mt-16 pt-8 border-t border-rule text-xs text-muted leading-relaxed">
-        <p>
-          Memo is a Claude skill, demoed as a web app.{' '}
-          <a href="https://github.com/b1rdmania/memo" className="underline">Skill</a>{' '}·{' '}
-          <a href="https://github.com/b1rdmania/memo-app" className="underline">App</a>{' '}·{' '}
-          <button onClick={onAbout} className="underline">About</button>
-        </p>
-      </footer>
-    </div>
+          {/* 01. SAMPLES */}
+          <section className="mb-24">
+            <h2 className="text-2xl font-bold tracking-tight2 text-ink mb-3">
+              01. Try a sample
+            </h2>
+            <p className="prose-p">
+              Pre-baked outputs. No API key needed. Click any sample to see
+              all three audience outputs side by side.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-3 mt-8">
+              {Object.values(SAMPLES).map(s => (
+                <button
+                  key={s.key}
+                  type="button"
+                  disabled={busy}
+                  onClick={() => runSample(s.key)}
+                  className="text-left border border-rule p-5 hover:border-ink hover:bg-wash transition-colors bg-paper disabled:opacity-50 group min-h-[100px]"
+                >
+                  <div className="flex items-baseline justify-between gap-2 mb-2">
+                    <div className="font-semibold text-ink text-sm">{s.label}</div>
+                    <div className="text-xs font-mono text-muted group-hover:text-ink">→</div>
+                  </div>
+                  <div className="text-xs text-prose leading-relaxed">{s.description}</div>
+                </button>
+              ))}
+            </div>
+          </section>
+
+          {/* 02. RUN YOUR OWN */}
+          <section className="mb-24">
+            <h2 className="text-2xl font-bold tracking-tight2 text-ink mb-3">
+              02. Or run on your own memo
+            </h2>
+            <p className="prose-p">
+              Paste, drag in a PDF/DOCX, or upload a .txt. The tool numbers
+              the paragraphs and sends them to Claude using your own
+              Anthropic API key — nothing touches a Memo server.
+            </p>
+
+            <label className="flex items-start gap-3 mt-8 mb-6 text-sm text-prose cursor-pointer">
+              <input
+                type="checkbox"
+                checked={privilegeAck}
+                onChange={e => setPrivilegeAck(e.target.checked)}
+                className="mt-1 w-4 h-4 accent-ink shrink-0"
+              />
+              <span className="leading-relaxed">
+                I understand this is a prototype. I will not paste privileged,
+                client-confidential, or sensitive material. Your Anthropic API
+                key and memo stay in your browser — nothing is sent to a
+                Memo server.
+              </span>
+            </label>
+
+            <div className="mb-4">
+              <div className="eyebrow mb-3">Audience</div>
+              <AudiencePicker value={audience} onChange={setAudience} />
+            </div>
+
+            <textarea
+              value={text}
+              onChange={e => setText(e.target.value)}
+              placeholder="Paste your memo here."
+              rows={10}
+              className="w-full border border-rule bg-paper p-4 font-mono text-sm leading-relaxed focus:outline-none focus:border-ink resize-y"
+            />
+
+            <div className="flex flex-wrap items-center gap-3 mt-3">
+              <label className="inline-flex items-center cursor-pointer min-h-[44px]">
+                <span className="px-4 py-2.5 border border-rule hover:border-ink transition-colors text-sm">
+                  Upload .pdf / .docx / .txt
+                </span>
+                <input
+                  type="file"
+                  accept=".pdf,.docx,.txt,.md"
+                  onChange={onFile}
+                  className="hidden"
+                />
+              </label>
+
+              <button
+                type="button"
+                disabled={busy}
+                onClick={runLive}
+                className="ml-auto bg-ink text-paper px-6 py-2.5 min-h-[44px] hover:bg-black transition-colors disabled:opacity-50 text-sm font-medium"
+              >
+                {busy ? 'Working…' : 'Distil →'}
+              </button>
+            </div>
+
+            {error && (
+              <div className="mt-4 text-sm text-red-700 border-l-4 border-red-700 bg-red-50 p-4">
+                {error}
+              </div>
+            )}
+          </section>
+
+          {/* 03. PITCH */}
+          <section className="mb-24">
+            <h2 className="text-2xl font-bold tracking-tight2 text-ink mb-3">
+              03. The skill is the product
+            </h2>
+            <p className="prose-p">
+              The app you're looking at is a demo. The thing it demos is a
+              Claude skill — a portable Markdown file with a prompt and a
+              contract. Anyone with Claude can run it without this app.
+            </p>
+            <div className="bg-wash p-8 border-l-4 border-ink my-10">
+              <p className="text-sm font-medium italic m-0 text-prose">
+                "We think the unit of legal-tech distribution is a skill, not
+                an app. Lawyers won't all ship apps. They will run skills."
+              </p>
+            </div>
+            <p className="prose-p">
+              Memo is built on{' '}
+              <a
+                href="https://github.com/map107/Briefly-Memo-Distiller"
+                className="underline decoration-rule hover:decoration-ink"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Briefly
+              </a>
+              {' '}— the 30-minute LinkedIn vibe — but asks: what would a
+              lawyer actually trust?{' '}
+              <button
+                type="button"
+                onClick={onAbout}
+                className="underline decoration-rule hover:decoration-ink"
+              >
+                Read more →
+              </button>
+            </p>
+          </section>
+
+          <footer className="mt-32 pt-12 border-t border-rule flex flex-wrap justify-between items-center gap-4 text-xs text-muted uppercase tracking-track2">
+            <span>© 2026 Birdmania · MIT</span>
+            <div className="flex flex-wrap gap-6">
+              <a href="https://github.com/b1rdmania/memo" target="_blank" rel="noreferrer" className="hover:text-ink">Skill</a>
+              <a href="https://github.com/b1rdmania/memo-app" target="_blank" rel="noreferrer" className="hover:text-ink">App</a>
+              <button onClick={onAbout} className="hover:text-ink uppercase tracking-track2">About</button>
+            </div>
+          </footer>
+        </main>
+      </div>
+    </>
   );
 }
