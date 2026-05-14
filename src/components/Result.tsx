@@ -1,13 +1,19 @@
 import { useMemo, useRef, useState, useEffect } from 'react';
 import type { Audience, MemoOutput } from '../lib/types';
+import { loadSample, type SampleKey } from '../lib/samples';
+import { runMemo } from '../lib/anthropic';
 
 interface Props {
   memo: string;
   audience: Audience;
   output: MemoOutput;
   source: 'sample' | 'live';
+  sampleKey?: SampleKey;
   onBack: () => void;
+  onSwap: (audience: Audience, output: MemoOutput) => void;
 }
+
+const KEY_STORAGE = 'memo-app:anthropic-key';
 
 const AUDIENCE_LABEL: Record<Audience, string> = {
   client: 'Client',
@@ -21,8 +27,11 @@ const AUDIENCE_SUB: Record<Audience, string> = {
   senior: 'Risk & sign-off note',
 };
 
-export function Result({ memo, audience, output, source, onBack }: Props) {
+const AUDIENCES: Audience[] = ['client', 'junior', 'senior'];
+
+export function Result({ memo, audience, output, source, sampleKey, onBack, onSwap }: Props) {
   const [activeClaim, setActiveClaim] = useState<number | null>(null);
+  const [swapping, setSwapping] = useState<Audience | null>(null);
   const memoRef = useRef<HTMLPreElement>(null);
 
   const paragraphs = useMemo(() => splitMemo(memo), [memo]);
@@ -39,27 +48,69 @@ export function Result({ memo, audience, output, source, onBack }: Props) {
     target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, [activeClaim, output.claims]);
 
+  async function switchAudience(next: Audience) {
+    if (next === audience || swapping) return;
+    setSwapping(next);
+    try {
+      if (source === 'sample' && sampleKey) {
+        const { output: nextOutput } = await loadSample(sampleKey, next);
+        onSwap(next, nextOutput);
+      } else if (source === 'live') {
+        if (!confirm(`Re-run for ${AUDIENCE_LABEL[next]}? This uses your Anthropic API key.`)) return;
+        const key = localStorage.getItem(KEY_STORAGE);
+        if (!key) {
+          alert('No API key in localStorage. Go back to the home page to re-enter.');
+          return;
+        }
+        const nextOutput = await runMemo(key, memo, next);
+        onSwap(next, nextOutput);
+      }
+    } catch (e: any) {
+      alert(e.message ?? 'Failed to switch audience');
+    } finally {
+      setSwapping(null);
+      setActiveClaim(null);
+    }
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-6 py-8">
       <div className="flex items-baseline justify-between mb-6 gap-4 flex-wrap">
-        <div>
-          <button
-            type="button"
-            onClick={onBack}
-            className="text-xs font-mono text-muted hover:text-ink uppercase tracking-wider mb-2 block"
-          >
-            ← New memo
-          </button>
-          <h1 className="font-serif text-3xl text-ink">
-            Memo for {AUDIENCE_LABEL[audience]}
-          </h1>
-          <div className="text-sm text-muted mt-1">{AUDIENCE_SUB[audience]}</div>
-        </div>
+        <button
+          type="button"
+          onClick={onBack}
+          className="text-xs font-mono text-muted hover:text-ink uppercase tracking-wider"
+        >
+          ← New memo
+        </button>
         {source === 'sample' && (
           <div className="text-xs font-mono uppercase tracking-wider border border-rule px-2 py-1 rounded-sm">
             Pre-baked sample
           </div>
         )}
+      </div>
+
+      <div className="mb-8">
+        <div className="flex gap-1 border-b border-rule">
+          {AUDIENCES.map(a => (
+            <button
+              key={a}
+              type="button"
+              onClick={() => switchAudience(a)}
+              disabled={!!swapping}
+              className={`px-4 py-3 text-sm border-b-2 -mb-px transition-colors disabled:opacity-50 ${
+                a === audience
+                  ? 'border-ink text-ink font-medium'
+                  : 'border-transparent text-muted hover:text-ink hover:border-rule'
+              }`}
+            >
+              {swapping === a ? 'Loading…' : AUDIENCE_LABEL[a]}
+            </button>
+          ))}
+        </div>
+        <div className="text-xs text-muted mt-2 font-mono">
+          {AUDIENCE_SUB[audience]}
+        </div>
       </div>
 
       <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8">
@@ -71,13 +122,13 @@ export function Result({ memo, audience, output, source, onBack }: Props) {
             <div className="text-ink leading-relaxed">{output.decision}</div>
           </div>
 
-          <div className="prose-memo whitespace-pre-wrap text-ink leading-relaxed font-serif text-[17px]">
+          <div className="whitespace-pre-wrap text-ink leading-relaxed font-serif text-[17px]">
             {output.rendered}
           </div>
 
           <div className="mt-10 border-t border-rule pt-6">
             <div className="text-xs font-mono uppercase tracking-wider text-muted mb-3">
-              Claims ({output.claims.length})
+              Claims ({output.claims.length}) — click to highlight source
             </div>
             <ol className="space-y-2">
               {output.claims.map((c, i) => (
@@ -109,7 +160,7 @@ export function Result({ memo, audience, output, source, onBack }: Props) {
           </div>
         </div>
 
-        <aside className="lg:sticky lg:top-6 lg:self-start lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto">
+        <aside className="lg:sticky lg:top-6 lg:self-start">
           <div className="text-xs font-mono uppercase tracking-wider text-muted mb-3">
             Source memo
           </div>

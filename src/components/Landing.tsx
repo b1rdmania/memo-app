@@ -7,12 +7,13 @@ import { runMemo } from '../lib/anthropic';
 import type { Audience, MemoOutput } from '../lib/types';
 
 interface Props {
-  onResult: (memo: string, audience: Audience, output: MemoOutput, source: 'sample' | 'live') => void;
+  onResult: (memo: string, audience: Audience, output: MemoOutput, source: 'sample' | 'live', sampleKey?: SampleKey, liveCtx?: { numbered: string }) => void;
+  onAbout: () => void;
 }
 
 const KEY_STORAGE = 'memo-app:anthropic-key';
 
-export function Landing({ onResult }: Props) {
+export function Landing({ onResult, onAbout }: Props) {
   const [audience, setAudience] = useState<Audience>('client');
   const [text, setText] = useState('');
   const [privilegeAck, setPrivilegeAck] = useState(false);
@@ -23,8 +24,8 @@ export function Landing({ onResult }: Props) {
     setBusy(true);
     setError(null);
     try {
-      const { memo, output } = await loadSample(key, audience);
-      onResult(memo, audience, output, 'sample');
+      const { memo, output } = await loadSample(key, 'client');
+      onResult(memo, 'client', output, 'sample', key);
     } catch (e: any) {
       setError(e.message ?? 'Failed to load sample');
     } finally {
@@ -39,7 +40,7 @@ export function Landing({ onResult }: Props) {
       return;
     }
     if (!text.trim()) {
-      setError('Paste a memo, or upload one, or try a sample below.');
+      setError('Paste a memo, upload one, or try a sample above.');
       return;
     }
     let key = localStorage.getItem(KEY_STORAGE);
@@ -54,7 +55,7 @@ export function Landing({ onResult }: Props) {
     try {
       const numbered = paragraphize(text);
       const output = await runMemo(key, numbered, audience);
-      onResult(numbered, audience, output, 'live');
+      onResult(numbered, audience, output, 'live', undefined, { numbered });
     } catch (e: any) {
       setError(e.message ?? 'Run failed');
     } finally {
@@ -78,11 +79,21 @@ export function Landing({ onResult }: Props) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12 sm:py-16">
-      <header className="mb-10">
-        <div className="text-xs uppercase tracking-[0.18em] text-muted font-mono mb-3">
+    <div className="max-w-4xl mx-auto px-6 py-10 sm:py-14">
+      <nav className="flex items-center justify-between mb-12">
+        <div className="text-xs uppercase tracking-[0.18em] text-muted font-mono">
           memo
         </div>
+        <button
+          type="button"
+          onClick={onAbout}
+          className="text-xs font-mono text-muted hover:text-ink uppercase tracking-wider"
+        >
+          About
+        </button>
+      </nav>
+
+      <header className="mb-10">
         <h1 className="font-serif text-4xl sm:text-5xl leading-[1.05] text-ink mb-4">
           Legal memos,<br />reshaped for the reader.
         </h1>
@@ -92,26 +103,26 @@ export function Landing({ onResult }: Props) {
         </p>
       </header>
 
-      <section className="mb-10">
+      <section className="mb-12">
         <div className="text-xs uppercase tracking-wider text-muted font-mono mb-3">
-          Try a sample
+          Try a sample — instant, no API key
         </div>
-        <div className="grid sm:grid-cols-2 gap-3 mb-6">
+        <div className="grid sm:grid-cols-2 gap-3">
           {Object.values(SAMPLES).map(s => (
             <button
               key={s.key}
               type="button"
               disabled={busy}
               onClick={() => runSample(s.key)}
-              className="text-left border border-rule p-4 rounded-sm hover:border-ink transition-colors bg-white disabled:opacity-50"
+              className="text-left border border-rule p-4 rounded-sm hover:border-ink hover:bg-ink/5 transition-colors bg-white disabled:opacity-50 group"
             >
-              <div className="font-medium text-ink text-sm mb-1">{s.label}</div>
+              <div className="flex items-baseline justify-between gap-2 mb-1">
+                <div className="font-medium text-ink text-sm">{s.label}</div>
+                <div className="text-xs font-mono text-muted group-hover:text-accent">→</div>
+              </div>
               <div className="text-xs text-muted leading-relaxed">{s.description}</div>
             </button>
           ))}
-        </div>
-        <div className="text-xs text-muted mb-3">
-          Sample outputs are pre-baked — no API key needed.
         </div>
       </section>
 
@@ -140,7 +151,7 @@ export function Landing({ onResult }: Props) {
         <textarea
           value={text}
           onChange={e => setText(e.target.value)}
-          placeholder="Paste your memo here. Paragraphs separated by blank lines work best."
+          placeholder="Paste your memo here."
           rows={10}
           className="w-full border border-rule bg-white p-4 rounded-sm font-mono text-sm leading-relaxed focus:outline-none focus:border-ink"
         />
@@ -176,15 +187,11 @@ export function Landing({ onResult }: Props) {
       </section>
 
       <footer className="mt-16 pt-8 border-t border-rule text-xs text-muted leading-relaxed">
-        <p className="mb-2">
-          <strong className="text-ink">Memo is a Claude skill, demoed as a web app.</strong>
-          {' '}The skill is the product; the app is the proof. The same skill file{' '}
-          <a href="https://github.com/b1rdmania/memo" className="underline">runs anywhere Claude runs</a>.
-        </p>
         <p>
-          Built on{' '}
-          <a href="https://github.com/map107/Briefly-Memo-Distiller" className="underline">Briefly</a>{' '}
-          — the 30-minute LinkedIn vibe — but asking: what would a lawyer actually trust?
+          Memo is a Claude skill, demoed as a web app.{' '}
+          <a href="https://github.com/b1rdmania/memo" className="underline">Skill</a>{' '}·{' '}
+          <a href="https://github.com/b1rdmania/memo-app" className="underline">App</a>{' '}·{' '}
+          <button onClick={onAbout} className="underline">About</button>
         </p>
       </footer>
     </div>
